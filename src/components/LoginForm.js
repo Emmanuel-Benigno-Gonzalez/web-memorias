@@ -1,18 +1,18 @@
 // LoginForm.js
 import React, { useState } from 'react';
 
-const LoginForm = ({ onLogin }) => {
-  const [username, setUsername] = useState('');
+const LoginForm = (props) => {
+  const [correo, setCorreo] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Realiza la validación del usuario y contraseña
     // Aquí puedes implementar tu lógica de autenticación
-    if (username === 'usuario' && password === 'contraseña') {
+    if (correo === 'usuario' && password === 'contraseña') {
       // Guarda el estado de inicio de sesión en el almacenamiento local
       localStorage.setItem('isLoggedIn', true);
-      onLogin(username);
+      props.onLogin(correo);
     } else {
       alert('Usuario o contraseña incorrectos');
     }
@@ -23,8 +23,8 @@ const LoginForm = ({ onLogin }) => {
       <input
         type="text"
         placeholder="Usuario"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
+        value={correo}
+        onChange={(e) => setCorreo(e.target.value)}
       />
       <input
         type="password"

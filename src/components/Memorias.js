@@ -2,14 +2,16 @@ import React from 'react'
 import imagen from '../img/prueba.jpg';
 import '../styles/styles.css'
 
-const Memorias = () => {
+const Memorias = (props) => {
     return (
         <div className="Contenedor">
           <div className="grid">
             <div className="menu">
               <div className="usuario">
                 <img className="memoria__imagen" src={imagen} alt="imagen memoria" />
-                <h3>UserName</h3>
+                <h3>
+                    {props.name}
+                </h3>
                 <p>correo@correo.com</p>
                 <form className="formulario">
                   <div className="alinear-derecha flex">

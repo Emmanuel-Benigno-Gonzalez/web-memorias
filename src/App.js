@@ -37,10 +37,10 @@ const App = () => {
         <div>
           <h1>Bienvenido, {username}!</h1>
           <button onClick={handleLogout}>Cerrar sesión</button>
-          <Memorias/>
+          <Memorias name={username}/>
         </div>
       ) : (
-        <LoginForm onLogin={handleLogin} />
+        <LoginForm onLogin={handleLogin}/>
       )}
     </div>
   );
