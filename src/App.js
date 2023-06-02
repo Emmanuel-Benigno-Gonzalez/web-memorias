@@ -1,25 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import LoginForm from './components/LoginForm';
+import Memorias from './components/Memorias';
+import '../src/styles/loginStyles.css';
 
-function App() {
+const App = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [username, setUsername] = useState('');
+
+
+
+  useEffect(() => {
+    // Verifica el estado de inicio de sesión almacenado en el almacenamiento local
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    if (isLoggedIn === 'true') {
+      setLoggedIn(true);
+      setUsername('usuario'); // Establece el nombre de usuario que corresponda
+    }
+  }, []);
+
+
+  const handleLogin = (username) => {
+    setLoggedIn(true);
+    setUsername(username);
+  };
+
+  const handleLogout = () => {
+    // Elimina el estado de inicio de sesión del almacenamiento local al cerrar sesión
+    localStorage.removeItem('isLoggedIn');
+    setLoggedIn(false);
+    setUsername('');
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {loggedIn ? (
+        <div>
+          <h1>Bienvenido, {username}!</h1>
+          <button onClick={handleLogout}>Cerrar sesión</button>
+          <Memorias/>
+        </div>
+      ) : (
+        <LoginForm onLogin={handleLogin} />
+      )}
     </div>
   );
-}
+};
 
 export default App;
+
